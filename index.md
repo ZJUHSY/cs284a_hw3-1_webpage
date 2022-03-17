@@ -29,7 +29,13 @@ Below are some images renderd after finishing part1 (normal shading).
 
 #### 2-1 Walk through your BVH construction algorithm. Explain the heuristic you chose for picking the splitting point.
 
+For the construction process of BVH, it is a recursive process. We simply traverse the primitives and add them to the current leaf node if the number of primitives within the current bounding volume is less than the ***max_leaf_size*** predefined. Otherwise, we try to find an optimal split method and recursively call the function to get the left and right child of the current BVH node. 
+
+As for the heuristic of choosing the splitting point, we calculate the centroid coordinates of the current BVH node by averaging the centroids of its primitives’ bbox. And we divide all of the current node’s primitives into left and right sides. We calculate the difference between the number of primitives which belong to left and right. The optimal partition is the one which splits most evenly, meaning the difference between left and right is smalleest. 
+
+
 #### 2-2 Show images with normal shading for a few large .dae files that you can only render with BVH acceleration.
+
 
 #### 2-3 Compare rendering times on a few scenes with moderately complex geometries with and without BVH acceleration. Present your results in a one-paragraph analysis.
 
