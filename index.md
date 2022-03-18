@@ -3,6 +3,12 @@
 
 ## Project Overview
 
+In this project, we have built a complete rendering using a path tracing algorithm step by step. From the beginning, we apply ray intersection with primitive. And then we use ***BVH*** (Bounding Volume Hierarchy) to speed up the process of calculating ray intersections. 
+
+For the next part, we implement direct illumination and indirect illumination to calculate the lightings on the surface of the material. Basically, we divide lighting as zero bounce, one bounce and multiple bounces. Those combined enable realistic shading of the object, which makes rendered images more close to real-world objects than previous ones. 
+
+For the last part, we implement adaptive sampling, which is a method to sample pixels to reduce noise. It avoids the problem of using high resolution per pixels and puts more importance on  points which converge slower. This gives us a way to get a tradeoff between high computations and low noise. 
+
 
 ## Part1: Ray Generation and Scene Intersection
 
