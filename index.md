@@ -22,8 +22,12 @@ If the point is inside the triangle, we update ray’s max_t and store required 
 
 Below are some images renderd after finishing part1 (normal shading).
 
-<img src="/pic/p1/CBempty.png" width="45%"/> <img src="/pic/p1/CBspheres.png" width="45%"/> 
-<img src="/pic/p1/teopot.png" width="45%"/> <img src="/pic/p1/banana.png" width="45%"/> 
+CBempty | CBspheres 
+:---: | :---:
+![](/pic/p1/CBempty.png) | ![](/pic/p1/CBspheres.png) 
+teopot | banana 
+![](/pic/p1/teopot.png) | ![](/pic/p1/banana.png) 
+
 
 ## Part2: Bounding Volume Hierarchy
 
@@ -35,7 +39,11 @@ As for the heuristic of choosing the splitting point, we calculate the centroid 
 
 ### 2-2 Show images with normal shading for a few large .dae files that you can only render with BVH acceleration.
 
-<img src="/pic/p2/maxplanck.png" width="30%"/> <img src="/pic/p2/beast.png" width="30%"/> <img src="/pic/p2/CBlucy.png" width="30%"/> 
+maxplanck | beast | CBlucy
+:---: | :---: | :---:
+![](/pic/p2/maxplanck.png) | ![](/pic/p2/beast.png) | ![](/pic/p2/CBlucy.png)
+
+<!-- <img src="/pic/p2/maxplanck.png" width="30%"/> <img src="/pic/p2/beast.png" width="30%"/> <img src="/pic/p2/CBlucy.png" width="30%"/>  -->
 
 For the three images above:
  - Maxplanck: over 50000 primitives, hard to render without BVH accelerating. But it only took 0.1680s to render with BVH acceleration. 
@@ -44,8 +52,13 @@ For the three images above:
 
 ### 2-3 Compare rendering times on a few scenes with moderately complex geometries with and without BVH acceleration. Present your results in a one-paragraph analysis.
 
-<img src="/pic/p2/time_beast1.png" width="45%"/> <img src="/pic/p2/time_beast2.png" width="45%"/> 
-<img src="/pic/p2/time_teapot1.png" width="45%"/> <img src="/pic/p2/time_teapot2.png" width="45%"/> 
+
+\ | Raw | With BVH 
+:---: | :---: | :---:
+beast | ![](/pic/p2/time_beast1.png) | ![](/pic/p2/time_beast2.png) 
+teapot | ![](/pic/p2/time_teapot1.png) | ![](/pic/p2/time_teapot2.png) 
+<!-- |<img src="/pic/p2/time_beast1.png" width="45%"/> <img src="/pic/p2/time_beast2.png" width="45%"/>  -->
+<!-- |<img src="/pic/p2/time_teapot1.png" width="45%"/> <img src="/pic/p2/time_teapot2.png" width="45%"/>  -->
 
 We compare the performance on rendering some moderately complex geometries. From the image above, we can see that it took 54s to render the beast.dae file with over 60000 ptimitives. But it only took 0.1405s with BVH acceleration, which is a nearly 400x speedup. And it took 22s to render the teopot.dae file with over 2000 primitves. But it only took 0.06s with BVH acceleration, which is a 1500x speedup. 
 
