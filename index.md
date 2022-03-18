@@ -93,6 +93,17 @@ Shperes:\
 64 light rays:\
 ![3-3-4](/pic/p3/3-3-4.png)\
 ### 3-4 Compare the results between uniform hemisphere sampling and lighting sampling in a one-paragraph analysis.
+Results of uniform hemisphere sampling:\
+16 light rays:\
+![3-3-6](/pic/p3/3-3-6.png)\
+64 light rays:\
+![3-3-5](/pic/p3/3-3-5.png)\
+Results of lighting sampling:\
+16 light rays:\
+![3-3-3](/pic/p3/3-3-3.png)\
+64 light rays:\
+![3-3-4](/pic/p3/3-3-4.png)\
+Analysis:\
 
 ## Part4: Global Illumination
 
