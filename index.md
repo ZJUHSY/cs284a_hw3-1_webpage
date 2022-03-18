@@ -84,8 +84,14 @@ Dragon:\
 Shperes:\
 ![3-2-6](/pic/p3/3-2-6.png)
 ### 3-3 Focus on one particular scene with at least one area light and compare the noise levels in soft shadows when rendering with 1, 4, 16, and 64 light rays (the -l flag) and with 1 sample per pixel (the -s flag) using light sampling, not uniform hemisphere sampling.
-
-
+1 light ray:\
+![3-3-1](/pic/p3/3-3-1.png)\
+4 light rays:\
+![3-3-2](/pic/p3/3-3-2.png)\
+16 light rays:\
+![3-3-3](/pic/p3/3-3-3.png)\
+64 light rays:\
+![3-3-4](/pic/p3/3-3-4.png)\
 ### 3-4 Compare the results between uniform hemisphere sampling and lighting sampling in a one-paragraph analysis.
 
 ## Part4: Global Illumination
