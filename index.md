@@ -118,7 +118,6 @@ As can be seen from the figure, compared with lighting sampling, uniform hemisph
 
 ### 4-5 Pick one scene and compare rendered views with various sample-per-pixel rates, including at least 1, 2, 4, 8, 16, 64, and 1024. Use 4 light rays.
 
-### 4-6 You will probably want to use the instructional machines for the above renders in order to not burn up your own computer for hours.
 
 ## Part5: Adaptive Sampling
 
