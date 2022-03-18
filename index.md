@@ -64,16 +64,20 @@ Overall, the speedup of rendering bought by BVH acceleration range from 100x to 
 ## Part3: Direct Illumination
 
 ### 3-1 Walk through both implementations of the direct lighting function.
+There are two implementations for direct lighting are included in this assignment. The difference between these two lies in the sampling method for the incident angle.\
+Uniform Hemisphere sampling: In this kind of sampling, because the detected light and the light source are not necessarily in the same direction, many detected light do not play a role in the reflected light equation. In the actual implementation, we need to simulate the inverse process of the whole process, that is, tracking it from the opposite direction of light rays. Once the tracked rays have intersection in the scene, we will calculate the corresponding ray influence, update the color around the pixel in the scene, and then repeat this process repeatedly until each ray has been tracked. The correct handling of intersections is very important in code implementation. We not only need to calculate how much light converges at intersections, but also need to integrate over all the light arriving in a hemisphere around the point of interest. Monte Carlo estimator will be used in this integration process. After we traverse all incoming lights, we can use the reflection equation to calculate the illumination of the whole scene, and finally update the EST_radiance_global_Illumination to get the results.
 
-
+  报错 笔记
+Importance sampling:
 ### 3-2 Show some images rendered with both implementations of the direct lighting function.
 Bunny:\
-![3-2-1](/pic/p3/3-2-1.png)
+![3-2-1](/pic/p3/3-2-1.png)\
 Dragon:\
-![3-2-2](/pic/p3/3-2-2.png)
+![3-2-2](/pic/p3/3-2-2.png)\
 Shperes:\
 ![3-2-6](/pic/p3/3-2-6.png)
 ### 3-3 Focus on one particular scene with at least one area light and compare the noise levels in soft shadows when rendering with 1, 4, 16, and 64 light rays (the -l flag) and with 1 sample per pixel (the -s flag) using light sampling, not uniform hemisphere sampling.
+
 
 ### 3-4 Compare the results between uniform hemisphere sampling and lighting sampling in a one-paragraph analysis.
 
