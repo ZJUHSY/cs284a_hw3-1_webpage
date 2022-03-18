@@ -104,6 +104,7 @@ Results of lighting sampling:\
 64 light rays:\
 ![3-3-4](/pic/p3/3-3-4.png)\
 Analysis:\
+As can be seen from the figure, compared with lighting sampling, uniform hemisphere sampling has more noise, and the overall light is more uniform. Both will become clearer as the number of samples increases. The clarity of uniform hemisphere sampling changes more obviously with the number of samples.
 
 ## Part4: Global Illumination
 
