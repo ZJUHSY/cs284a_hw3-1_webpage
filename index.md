@@ -66,8 +66,6 @@ Overall, the speedup of rendering bought by BVH acceleration range from 100x to 
 ### 3-1 Walk through both implementations of the direct lighting function.
 There are two implementations for direct lighting are included in this assignment. The difference between these two lies in the sampling method for the incident angle.\
 Uniform Hemisphere sampling: In this kind of sampling, because the detected light and the light source are not necessarily in the same direction, many detected light do not play a role in the reflected light equation. In the actual implementation, we need to simulate the inverse process of the whole process, that is, tracking it from the opposite direction of light rays. Once the tracked rays have intersection in the scene, we will calculate the corresponding ray influence, update the color around the pixel in the scene, and then repeat this process repeatedly until each ray has been tracked. The correct handling of intersections is very important in code implementation. We not only need to calculate how much light converges at intersections, but also need to integrate over all the light arriving in a hemisphere around the point of interest. Monte Carlo estimator will be used in this integration process. After we traverse all incoming lights, we can use the reflection equation to calculate the illumination of the whole scene, and finally update the EST_radiance_global_Illumination to get the results.
-
-  报错 笔记
 Importance sampling:
 ### 3-2 Show some images rendered with both implementations of the direct lighting function.
 Bunny:\
