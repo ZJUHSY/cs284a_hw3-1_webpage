@@ -67,8 +67,11 @@ Overall, the speedup of rendering bought by BVH acceleration range from 100x to 
 
 
 ### 3-2 Show some images rendered with both implementations of the direct lighting function.
+Bunny:\
 ![3-2-1](/pic/p3/3-2-1.png)
+Dragon:\
 ![3-2-2](/pic/p3/3-2-2.png)
+Shperes:\
 ![3-2-6](/pic/p3/3-2-6.png)
 ### 3-3 Focus on one particular scene with at least one area light and compare the noise levels in soft shadows when rendering with 1, 4, 16, and 64 light rays (the -l flag) and with 1 sample per pixel (the -s flag) using light sampling, not uniform hemisphere sampling.
 
