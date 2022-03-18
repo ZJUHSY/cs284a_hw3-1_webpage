@@ -43,6 +43,8 @@ For the construction process of BVH, it is a recursive process. We simply traver
 
 As for the heuristic of choosing the splitting point, we calculate the centroid coordinates of the current BVH node by averaging the centroids of its primitives’ bbox. And we divide all of the current node’s primitives into left and right sides. We calculate the difference between the number of primitives which belong to left and right. The optimal partition is the one which splits most evenly, meaning the difference between left and right is smalleest. 
 
+Notice, we have to also deal with the situation where one side has 0 primitive. This will definitely cause inifite loop because when we enter the next level of function call we get the same node with same number of leafs (no distribution between left and right nodes). Therefore, we introduce extra logics: We sort the all primitives within the current node by its x-coordinates of the centroid, and split in the middle iterator to prevent segmentation fault. 
+
 ### 2-2 Show images with normal shading for a few large .dae files that you can only render with BVH acceleration.
 
 maxplanck | beast | CBlucy
@@ -77,46 +79,73 @@ Uniform Hemisphere sampling: In this kind of sampling, because the detected ligh
 Importance sampling: Different from uniform hemisphere sampling, importance sampling can ensure that each tracked light is directed to the light source. The only thing to consider is object occlusion. Therefore, under the same number of samples, importance sampling will be brighter than uniform hemisphere sampling. Because there will be no loss of light, there will be less noise than uniform hemisphere sampling. In the actual implementation process, we will directly sample all lights instead of only sampling in the hemisphere directions, which will be easier to implement than the previous sampling method, because each light in the scene can successfully reach the irradiation point. We need to bring all lights into the reflection equation to calculate the total light output. Finally, we also need to update the EST_radiance_global_Illumination to get the results. And the value of direct_hemisphere_sample is used to determine which kind of sampling should be used.
 
 ### 3-2 Show some images rendered with both implementations of the direct lighting function.
-Bunny:\
-![3-2-1](/pic/p3/3-2-1.png)\
-Dragon:\
-![3-2-2](/pic/p3/3-2-2.png)\
-Shperes:\
-![3-2-6](/pic/p3/3-2-6.png)
+
+Bunny | Dragon | Shperes
+:---: | :---: | :---:
+![3-2-1](/pic/p3/3-2-1.png) | ![3-2-2](/pic/p3/3-2-2.png) | ![3-2-6](/pic/p3/3-2-6.png)
+
 ### 3-3 Focus on one particular scene with at least one area light and compare the noise levels in soft shadows when rendering with 1, 4, 16, and 64 light rays (the -l flag) and with 1 sample per pixel (the -s flag) using light sampling, not uniform hemisphere sampling.
-1 light ray:\
-![3-3-1](/pic/p3/3-3-1.png)\
-4 light rays:\
-![3-3-2](/pic/p3/3-3-2.png)\
-16 light rays:\
-![3-3-3](/pic/p3/3-3-3.png)\
-64 light rays:\
-![3-3-4](/pic/p3/3-3-4.png)\
+
+ Light Ray | 1 | 4 | 16 | 64
+ :---: | :---: | :---: | :---: | :---:
+ bunny | ![3-3-1](/pic/p3/3-3-1.png) | ![3-3-2](/pic/p3/3-3-2.png) | ![3-3-3](/pic/p3/3-3-3.png) | ![3-3-4](/pic/p3/3-3-4.png)
+
 ### 3-4 Compare the results between uniform hemisphere sampling and lighting sampling in a one-paragraph analysis.
+
 Results of uniform hemisphere sampling:\
-16 light rays:\
-![3-3-6](/pic/p3/3-3-6.png)\
-64 light rays:\
-![3-3-5](/pic/p3/3-3-5.png)\
-Results of lighting sampling:\
-16 light rays:\
-![3-3-3](/pic/p3/3-3-3.png)\
-64 light rays:\
-![3-3-4](/pic/p3/3-3-4.png)\
+
+ \ | 16 light rays | 64 light rays 
+:---: | :---: | :---:
+Uniform Hemisphere Sampling | ![3-3-6](/pic/p3/3-3-6.png) | ![3-3-5](/pic/p3/3-3-5.png)
+Lighting Sampling | ![3-3-3](/pic/p3/3-3-3.png) | ![3-3-4](/pic/p3/3-3-4.png)
+
 Analysis:\
 As can be seen from the figure, compared with lighting sampling, uniform hemisphere sampling has more noise, and the overall light is more uniform. Both will become clearer as the number of samples increases. The clarity of uniform hemisphere sampling changes more obviously with the number of samples.
 
 ## Part4: Global Illumination
 
 ### 4-1 Walk through your implementation of the indirect lighting function.
+For direct illumination, we only calculate the light that bounces zero or once. To add extra indirect illumination, we set m (the maximum depth of the ray), and sample incoming ray direction from the diffused materias. 
+
+In the main body of this part, ***at_least_one_bounce_radiance***, we call the one_bounce_radiance recursively until the reflected ray’s depth is lower than 2 or there are no intersections between the objects and the ray. We add up the indirect illumination using monte-carlo simulation. Notice, the function should do nothing if m is set to 0, because there should be no bounced lightings. 
+
+Finally, In the wrapper function called ***est_radiance_global_illumination***, we add up the direct illumination and indirect illumination to adjust the material lightings. 
 
 ### 4-2 Show some images rendered with global (direct and indirect) illumination. Use 1024 samples per pixel.
+ 
+ Below are some example rendered by global illumination. 
+ \ | \ | \ | \ 
+:---: | :---: | :---: | :---:
+![](/pic/p4/4-2-1.png) | ![](/pic/p4/4-2-2.png) | ![](/pic/p4/4-2-3.png) | ![](/pic/p4/4-2-4.png)
 
 ### 4-3 Pick one scene and compare rendered views first with only direct illumination, then only indirect illumination. Use 1024 samples per pixel.
 
+We pick ../dae/sky/CBspheres_lambertian.dae for testing. For the direct illumination, we only include zero or one bounce. For the indirect intersections, we only include one or more bounce. For global illumniation, we combine the two. 
+
+We can see from the results as below. The indirect illumination has a dark center but light surroudnings. The direct illumination has a light center and dark surroundings. The global illumination has an overall lighed ceilings. And also the surface of the spheres are darker for direct illumniation compared to global and indirect illuminiation.
+
+\ | global | indirect | direct
+:---: | :---: | :---: | :---: 
+spheres | ![](/pic/p4/CBspheres_global.png) | ![](/pic/p4/CBspheres_indirect.png) | ![](/pic/p4/CBspheres_direct.png)
+
 ### 4-4 For CBbunny.dae, compare rendered views with max_ray_depth set to 0, 1, 2, 3, and 100 (the -m flag). Use 1024 samples per pixel.
 
+We can see from below that we only get zero-boucne illumniation when m=0, the whole scene is dark excpet the ceilings. And when we increase the maximum depth of the ray, the whole scene gets lighter with more indirect illumination. 
+\ | m=0 | m=1 | m=2 | m=100
+:---: | :---: | :---: | :---: | :---:
+bunny | ![](/pic/p4/CBunny_m0.png) | ![](/pic/p4/CBunny_m1.png) | ![](/pic/p4/CBunny_m2.png) | ![](/pic/p4/CBunny_m100.png)
+
 ### 4-5 Pick one scene and compare rendered views with various sample-per-pixel rates, including at least 1, 2, 4, 8, 16, 64, and 1024. Use 4 light rays.
+
+We pick bench.dae and compare the magic of various sample-per-pixel rates. We can see that the rendered views' noise decrease as the sample-per-pixel increases. 
+
+\ | s=1 | s=2 | s=4 | s=8 
+:---: | :---: | :---: | :---: | :---:
+bench | ![](/pic/p4/bench_s1.png) | ![](/pic/p4/bench_s2.png) | ![](/pic/p4/bench_s4.png) | ![](/pic/p4/bench_s8.png)
+
+\ | s=16 | s=64 | s=1024 
+:---: | :---: | :---: | :---:
+bench | ![](/pic/p4/bench_s16.png) | ![](/pic/p4/bench_s64.png) | ![](/pic/p4/bench_s1024.png) 
 
 
 ## Part5: Adaptive Sampling
@@ -125,13 +154,12 @@ As can be seen from the figure, compared with lighting sampling, uniform hemisph
 In light sampling, the noise in the scene is always difficult to avoid. Although the noise can be eliminated by increasing the number of samples, increasing the number of samples globally will add a lot of unnecessary computational costs. We often do not need to uniformly increase the sampling amount of all pixels, but dynamically allocate according to the specific situation of the image, which is adaptive sampling. The adaptive sampling we implement is to check whether I is within the maximum tolerance through the sample mean and variance to measure the pixel's conversion I to determine whether it is less than the tolerance.
 
 ### 5-2 Pick one scene and render it with at least 2048 samples per pixel. Show a good sampling rate image with clearly visible differences in sampling rate over various regions and pixels. Include both your sample rate image, which shows your how your adaptive sampling changes depending on which part of the image you are rendering, and your noise-free rendered result. Use 1 sample per light and at least 5 for max ray depth.
+
 Noise-free Rendered Result:\
 ![bunny.png](/pic/p5/bunny.png)\
 Sample Rate Image:\
 ![bunny_rate.png](/pic/p5/bunny_rate.png)\
 ## Extra Credits
-
-
 
 
 
