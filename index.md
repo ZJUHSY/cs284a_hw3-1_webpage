@@ -43,7 +43,6 @@ maxplanck | beast | CBlucy
 :---: | :---: | :---:
 ![](/pic/p2/maxplanck.png) | ![](/pic/p2/beast.png) | ![](/pic/p2/CBlucy.png)
 
-<!-- <img src="/pic/p2/maxplanck.png" width="30%"/> <img src="/pic/p2/beast.png" width="30%"/> <img src="/pic/p2/CBlucy.png" width="30%"/>  -->
 
 For the three images above:
  - Maxplanck: over 50000 primitives, hard to render without BVH accelerating. But it only took 0.1680s to render with BVH acceleration. 
@@ -57,8 +56,6 @@ For the three images above:
 :---: | :---: | :---:
 beast | ![](/pic/p2/time_beast1.png) | ![](/pic/p2/time_beast2.png) 
 teapot | ![](/pic/p2/time_teapot1.png) | ![](/pic/p2/time_teapot2.png) 
-<!-- |<img src="/pic/p2/time_beast1.png" width="45%"/> <img src="/pic/p2/time_beast2.png" width="45%"/>  -->
-<!-- |<img src="/pic/p2/time_teapot1.png" width="45%"/> <img src="/pic/p2/time_teapot2.png" width="45%"/>  -->
 
 We compare the performance on rendering some moderately complex geometries. From the image above, we can see that it took 54s to render the beast.dae file with over 60000 ptimitives. But it only took 0.1405s with BVH acceleration, which is a nearly 400x speedup. And it took 22s to render the teopot.dae file with over 2000 primitves. But it only took 0.06s with BVH acceleration, which is a 1500x speedup. 
 
@@ -67,6 +64,7 @@ Overall, the speedup of rendering bought by BVH acceleration range from 100x to 
 ## Part3: Direct Illumination
 
 ### 3-1 Walk through both implementations of the direct lighting function.
+
 
 ### 3-2 Show some images rendered with both implementations of the direct lighting function.
 
