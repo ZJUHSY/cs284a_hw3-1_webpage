@@ -123,7 +123,8 @@ As can be seen from the figure, compared with lighting sampling, uniform hemisph
 ## Part5: Adaptive Sampling
 
 ### 5-1 Walk through your implementation of the adaptive sampling.
-In light sampling, the noise in the scene is always difficult to avoid. Although the noise can be eliminated by increasing the number of samples, increasing the number of samples globally will add a lot of unnecessary computational costs. We often do not need to uniformly increase the sampling amount of all pixels, but dynamically allocate according to the specific situation of the image, which is adaptive sampling. The adaptive sampling we implement is to check whether I is within the maximum tolerance through the sample mean and variance to measure the pixel's conversion I to determine whether it is less than the tolerance.\
+In light sampling, the noise in the scene is always difficult to avoid. Although the noise can be eliminated by increasing the number of samples, increasing the number of samples globally will add a lot of unnecessary computational costs. We often do not need to uniformly increase the sampling amount of all pixels, but dynamically allocate according to the specific situation of the image, which is adaptive sampling. The adaptive sampling we implement is to check whether I is within the maximum tolerance through the sample mean and variance to measure the pixel's conversion I to determine whether it is less than the tolerance.
+
 ### 5-2 Pick one scene and render it with at least 2048 samples per pixel. Show a good sampling rate image with clearly visible differences in sampling rate over various regions and pixels. Include both your sample rate image, which shows your how your adaptive sampling changes depending on which part of the image you are rendering, and your noise-free rendered result. Use 1 sample per light and at least 5 for max ray depth.
 
 ## Extra Credits
