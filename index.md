@@ -3,6 +3,12 @@
 
 ## Project Overview
 
+In this project, we have built a complete rendering using a path tracing algorithm step by step. From the beginning, we apply ray intersection with primitive. And then we use ***BVH*** (Bounding Volume Hierarchy) to speed up the process of calculating ray intersections. 
+
+For the next part, we implement direct illumination and indirect illumination to calculate the lightings on the surface of the material. Basically, we divide lighting as zero bounce, one bounce and multiple bounces. Those combined enable realistic shading of the object, which makes rendered images more close to real-world objects than previous ones. 
+
+For the last part, we implement adaptive sampling, which is a method to sample pixels to reduce noise. It avoids the problem of using high resolution per pixels and puts more importance on  points which converge slower. This gives us a way to get a tradeoff between high computations and low noise. 
+
 
 ## Part1: Ray Generation and Scene Intersection
 
@@ -64,15 +70,41 @@ Overall, the speedup of rendering bought by BVH acceleration range from 100x to 
 ## Part3: Direct Illumination
 
 ### 3-1 Walk through both implementations of the direct lighting function.
+There are two implementations for direct lighting are included in this assignment. The difference between these two lies in the sampling method for the incident angle.\
 
+Uniform Hemisphere sampling: In this kind of sampling, because the detected light and the light source are not necessarily in the same direction, many detected light do not play a role in the reflected light equation. In the actual implementation, we need to simulate the inverse process of the whole process, that is, tracking it from the opposite direction of light rays. Once the tracked rays have intersection in the scene, we will calculate the corresponding ray influence, update the color around the pixel in the scene, and then repeat this process repeatedly until each ray has been tracked. The correct handling of intersections is very important in code implementation. We not only need to calculate how much light converges at intersections, but also need to integrate over all the light arriving in a hemisphere around the point of interest. Monte Carlo estimator will be used in this integration process. After we traverse all incoming lights, we can use the reflection equation to calculate the illumination of the whole scene, and finally update the EST_radiance_global_Illumination to get the results.\
+
+Importance sampling: Different from uniform hemisphere sampling, importance sampling can ensure that each tracked light is directed to the light source. The only thing to consider is object occlusion. Therefore, under the same number of samples, importance sampling will be brighter than uniform hemisphere sampling. Because there will be no loss of light, there will be less noise than uniform hemisphere sampling. In the actual implementation process, we will directly sample all lights instead of only sampling in the hemisphere directions, which will be easier to implement than the previous sampling method, because each light in the scene can successfully reach the irradiation point. We need to bring all lights into the reflection equation to calculate the total light output. Finally, we also need to update the EST_radiance_global_Illumination to get the results. And the value of direct_hemisphere_sample is used to determine which kind of sampling should be used.
 
 ### 3-2 Show some images rendered with both implementations of the direct lighting function.
-![3-2-1](/pic/p3/3-2-1.png)
-![3-2-2](/pic/p3/3-2-2.png)
+Bunny:\
+![3-2-1](/pic/p3/3-2-1.png)\
+Dragon:\
+![3-2-2](/pic/p3/3-2-2.png)\
+Shperes:\
 ![3-2-6](/pic/p3/3-2-6.png)
 ### 3-3 Focus on one particular scene with at least one area light and compare the noise levels in soft shadows when rendering with 1, 4, 16, and 64 light rays (the -l flag) and with 1 sample per pixel (the -s flag) using light sampling, not uniform hemisphere sampling.
-
+1 light ray:\
+![3-3-1](/pic/p3/3-3-1.png)\
+4 light rays:\
+![3-3-2](/pic/p3/3-3-2.png)\
+16 light rays:\
+![3-3-3](/pic/p3/3-3-3.png)\
+64 light rays:\
+![3-3-4](/pic/p3/3-3-4.png)\
 ### 3-4 Compare the results between uniform hemisphere sampling and lighting sampling in a one-paragraph analysis.
+Results of uniform hemisphere sampling:\
+16 light rays:\
+![3-3-6](/pic/p3/3-3-6.png)\
+64 light rays:\
+![3-3-5](/pic/p3/3-3-5.png)\
+Results of lighting sampling:\
+16 light rays:\
+![3-3-3](/pic/p3/3-3-3.png)\
+64 light rays:\
+![3-3-4](/pic/p3/3-3-4.png)\
+Analysis:\
+As can be seen from the figure, compared with lighting sampling, uniform hemisphere sampling has more noise, and the overall light is more uniform. Both will become clearer as the number of samples increases. The clarity of uniform hemisphere sampling changes more obviously with the number of samples.
 
 ## Part4: Global Illumination
 
@@ -86,14 +118,17 @@ Overall, the speedup of rendering bought by BVH acceleration range from 100x to 
 
 ### 4-5 Pick one scene and compare rendered views with various sample-per-pixel rates, including at least 1, 2, 4, 8, 16, 64, and 1024. Use 4 light rays.
 
-### 4-6 You will probably want to use the instructional machines for the above renders in order to not burn up your own computer for hours.
 
 ## Part5: Adaptive Sampling
 
 ### 5-1 Walk through your implementation of the adaptive sampling.
+In light sampling, the noise in the scene is always difficult to avoid. Although the noise can be eliminated by increasing the number of samples, increasing the number of samples globally will add a lot of unnecessary computational costs. We often do not need to uniformly increase the sampling amount of all pixels, but dynamically allocate according to the specific situation of the image, which is adaptive sampling. The adaptive sampling we implement is to check whether I is within the maximum tolerance through the sample mean and variance to measure the pixel's conversion I to determine whether it is less than the tolerance.
 
 ### 5-2 Pick one scene and render it with at least 2048 samples per pixel. Show a good sampling rate image with clearly visible differences in sampling rate over various regions and pixels. Include both your sample rate image, which shows your how your adaptive sampling changes depending on which part of the image you are rendering, and your noise-free rendered result. Use 1 sample per light and at least 5 for max ray depth.
-
+Noise-free Rendered Result:\
+![bunny.png](/pic/p5/bunny.png)\
+Sample Rate Image:\
+![bunny_rate.png](/pic/p5/bunny_rate.png)\
 ## Extra Credits
 
 
