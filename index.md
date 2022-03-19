@@ -169,7 +169,7 @@ The conventional calculation method is as follows:
 As taught in lecture, Moller Trumbore Algorithm is a method to quickly calculate the intersection of rays and triangles in three dimensions. Through vector and matrix calculation, the coordinates of intersection and center of gravity can be quickly obtained without pre calculation of plane equation containing triangles.\
 ![extra1](/pic/extra1.png)\
 Our code implementation is shown below:\
-![extra2](/pic/extra2.png)\
+![extra2](/pic/extra4.png)\
 Moller Trumbore Algorithm reduces the computational complexity of conventional intersection judgment to 7 times of multiplication, and improves the running efficiency of our code by 50%.
 Our website is hosted at [webiste](https://zjuhsy.github.io/cs284a_hw3-1_webpage/)
 
