@@ -170,7 +170,7 @@ As taught in lecture, Moller Trumbore Algorithm is a method to quickly calculate
 ![extra1](/pic/extra1.png)\
 Our code implementation is shown below:\
 ![extra2](/pic/extra2.png)\
-
+Moller Trumbore Algorithm reduces the computational complexity of conventional intersection judgment to 7 times of multiplication, and improves the running efficiency of our code by 50%.
 Our website is hosted at [webiste](https://zjuhsy.github.io/cs284a_hw3-1_webpage/)
 
 For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
