@@ -163,9 +163,14 @@ Sample Rate Image:\
 ![bunny_rate.png](/pic/p5/bunny_rate.png)\
 ## Extra Credits
 ### Soup up our naive parallelization or use some clever arithmetic tricks in your inner loops (probably ray intersection) to speed things up. Profile your code and find the bottlenecks. Tell us about anything that gives a significant increase in rays/sec from your initial implementation.
-In part1 Task3, when we implemented Ray-Triangle Intersection, we used Moller Trumbore Algorithm to speed up the intersection detection.
+In part1 Task3, when we implemented Ray-Triangle Intersection, we used Moller Trumbore Algorithm to speed up the intersection detection.\
+The conventional calculation method is as follows:
+![extra3](/pic/extra3.png)\
+As taught in lecture, Moller Trumbore Algorithm is a method to quickly calculate the intersection of rays and triangles in three dimensions. Through vector and matrix calculation, the coordinates of intersection and center of gravity can be quickly obtained without pre calculation of plane equation containing triangles.\
 ![extra1](/pic/extra1.png)\
+Our code implementation is shown below:\
 ![extra2](/pic/extra2.png)\
+
 Our website is hosted at [webiste](https://zjuhsy.github.io/cs284a_hw3-1_webpage/)
 
 For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
