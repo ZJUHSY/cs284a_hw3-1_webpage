@@ -162,7 +162,8 @@ Noise-free Rendered Result:\
 Sample Rate Image:\
 ![bunny_rate.png](/pic/p5/bunny_rate.png)\
 ## Extra Credits
-
+### Soup up our naive parallelization or use some clever arithmetic tricks in your inner loops (probably ray intersection) to speed things up. Profile your code and find the bottlenecks. Tell us about anything that gives a significant increase in rays/sec from your initial implementation.
+In part1 Task3, when we implemented Ray-Triangle Intersection, we used Moller Trumbore Algorithm to speed up the intersection detection.
 
 Our website is hosted at [webiste](https://zjuhsy.github.io/cs284a_hw3-1_webpage/)
 
