@@ -114,7 +114,8 @@ Finally, In the wrapper function called ***est_radiance_global_illumination***, 
 ### 4-2 Show some images rendered with global (direct and indirect) illumination. Use 1024 samples per pixel.
  
  Below are some example rendered by global illumination. 
- sphere | CBunny | bunny | dragon
+ 
+sphere | CBunny | bunny | dragon
 :---: | :---: | :---: | :---:
 ![](/pic/p4/4-2-1.png) | ![](/pic/p4/4-2-2.png) | ![](/pic/p4/4-2-3.png) | ![](/pic/p4/4-2-4.png)
 
