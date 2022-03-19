@@ -141,11 +141,11 @@ We pick bench.dae and compare the magic of various sample-per-pixel rates. We ca
 
 \ | s=1 | s=2 | s=4 | s=8 
 :---: | :---: | :---: | :---: | :---:
-bench | ![](/pic/p4/bench_s1.png) | ![](/pic/p4/bench_s2.png) | ![](/pic/p4/bench_s4.png) | ![](/pic/p4/bench_s8.png)
+bench | ![](/pic/p4/4-4-1.png) | ![](/pic/p4/4-4-2.png) | ![](/pic/p4/4-4-3.png) | ![](/pic/p4/4-4-4.png)
 
 \ | s=16 | s=64 | s=1024 
 :---: | :---: | :---: | :---:
-bench | ![](/pic/p4/bench_s16.png) | ![](/pic/p4/bench_s64.png) | ![](/pic/p4/bench_s1024.png) 
+bench | ![](/pic/p4/4-4-5.png) | ![](/pic/p4/4-4-6.png) | ![](/pic/p4/4-4-7.png) 
 
 
 ## Part5: Adaptive Sampling
