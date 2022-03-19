@@ -114,7 +114,7 @@ Finally, In the wrapper function called ***est_radiance_global_illumination***, 
 ### 4-2 Show some images rendered with global (direct and indirect) illumination. Use 1024 samples per pixel.
  
  Below are some example rendered by global illumination. 
- \ | \ | \ | \ 
+ sphere | CBunny | bunny | dragon
 :---: | :---: | :---: | :---:
 ![](/pic/p4/4-2-1.png) | ![](/pic/p4/4-2-2.png) | ![](/pic/p4/4-2-3.png) | ![](/pic/p4/4-2-4.png)
 
@@ -131,6 +131,7 @@ spheres | ![](/pic/p4/CBspheres_global.png) | ![](/pic/p4/CBspheres_indirect.png
 ### 4-4 For CBbunny.dae, compare rendered views with max_ray_depth set to 0, 1, 2, 3, and 100 (the -m flag). Use 1024 samples per pixel.
 
 We can see from below that we only get zero-boucne illumniation when m=0, the whole scene is dark excpet the ceilings. And when we increase the maximum depth of the ray, the whole scene gets lighter with more indirect illumination. 
+
 \ | m=0 | m=1 | m=2 | m=100
 :---: | :---: | :---: | :---: | :---:
 bunny | ![](/pic/p4/CBunny_m0.png) | ![](/pic/p4/CBunny_m1.png) | ![](/pic/p4/CBunny_m2.png) | ![](/pic/p4/CBunny_m100.png)
